@@ -1,66 +1,69 @@
-## Foundry
+# NFT Marketplace
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+## Overview
 
-Foundry consists of:
+The NFT Marketplace is a decentralized application built on the Ethereum blockchain that allows users to mint, buy, sell, and like non-fungible tokens (NFTs). This smart contract implements the ERC721 standard for NFTs and includes features for managing market items, including listing prices, ownership, and likes.
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+## Features
 
-## Documentation
+- **Minting Tokens**: Users can create new NFTs by minting them with a specified token URI and price.
+- **Market Listings**: NFTs can be listed for sale on the marketplace.
+- **Buying Tokens**: Users can purchase NFTs by submitting the asking price.
+- **Liking Tokens**: Users can like NFTs, with a limit on how many times a single user can like the same NFT.
+- **Fetching Market Items**: Users can view all unsold NFTs available in the marketplace.
+- **Fetching User NFTs**: Users can view their own NFTs.
 
-https://book.getfoundry.sh/
+## Contract Address
 
-## Usage
+The NFT Marketplace contract is deployed at the following address:
+```0xF2B4378d44eDa5f216393AAEe2016a860bE000e6```
 
-### Build
 
-```shell
-$ forge build
-```
+## Changes in the Final Contract
 
-### Test
+In the final version of the contract, due to some issues with compiling, the following changes were made:
 
-```shell
-$ forge test
-```
+ **Imported `ERC721URIStorage.sol`**: I was getting issue with `_tokenURI` and `_exists` as undefined identifier. To fix it, I added a second parameter `tokenURI` and then further imported `ERC721URIStorage.sol` to resolve this issue.
 
-### Format
+## Instructions to Run the Project Locally Using Foundry
 
-```shell
-$ forge fmt
-```
+To run the NFT Marketplace project locally, follow these steps:
 
-### Gas Snapshots
+1. **Install Foundry**: If you haven't already, install Foundry by following the instructions on the [Foundry GitHub page](https://github.com/foundry-rs/foundry).
 
-```shell
-$ forge snapshot
-```
+2. **Clone the Repository**: Clone the repository containing the NFT Marketplace code.
 
-### Anvil
+   ```bash
+   git clone https://github.com/a-singh09/nft_contracts/
+   cd nft_contracts/
+   ```
 
-```shell
-$ anvil
-```
+3. **Install Dependencies**: Ensure that all dependencies are installed. You can use the following command:
 
-### Deploy
+   ```bash
+   forge install
+   ```
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+4. **Compile the Contracts**: Compile the smart contracts using the following command:
 
-### Cast
+   ```bash
+   forge build
+   ```
 
-```shell
-$ cast <subcommand>
-```
+5. **Run Tests**: If you have tests written for the smart contracts, you can run them using:
 
-### Help
+   ```bash
+   forge test
+   ```
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+6. **Deploy the Contract**: To deploy the NFT Marketplace contract, use the provided deployment script. Make sure to configure your environment for deployment.
+
+   ```bash
+   forge script script/DeployNFTMarketplace.s.sol:DeployNFTMarketplace --sender <sender-key> --private-key <sender-private-key> --broadcast
+   ```
+
+7. **Interact with the Contract**: After deployment, you can interact with the contract using Foundry's console or any Ethereum wallet that supports contract interaction.
+
+## Conclusion
+
+The NFT Marketplace provides a robust platform for users to engage with NFTs in a decentralized manner. With features for minting, buying, and liking NFTs, it aims to enhance the user experience in the growing NFT ecosystem.
